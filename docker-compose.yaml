@@ -1,0 +1,19 @@
+services:
+  data_load:
+    build: {context: ., dockerfile: src/data_load/Dockerfile}
+    volumes: ["./data:/app/data", "./src:/app/src"]
+
+  data_quality:
+    build: {context: ., dockerfile: src/data_quality/Dockerfile}
+    volumes: ["./data:/app/data", "./src:/app/src"]
+    depends_on: [data_load]
+
+  data_research:
+    build: {context: ., dockerfile: src/data_research/Dockerfile}
+    volumes: ["./data:/app/data", "./src:/app/src"]
+    depends_on: [data_quality]
+
+  visualization:
+    build: {context: ., dockerfile: src/visualization/Dockerfile}
+    volumes: ["./data:/app/data", "./src:/app/src"]
+    depends_on: [data_research]
