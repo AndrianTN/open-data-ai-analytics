@@ -1,19 +1,57 @@
+version: "3.9"
+
 services:
+
   data_load:
-    build: {context: ., dockerfile: src/data_load/Dockerfile}
-    volumes: ["./data:/app/data", "./src:/app/src"]
+    build:
+      context: .
+      dockerfile: src/data_load/Dockerfile
+    container_name: data_load_service
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    networks:
+      - app-network
 
   data_quality:
-    build: {context: ., dockerfile: src/data_quality/Dockerfile}
-    volumes: ["./data:/app/data", "./src:/app/src"]
-    depends_on: [data_load]
+    build:
+      context: .
+      dockerfile: src/data_quality/Dockerfile
+    container_name: data_quality_service
+    depends_on:
+      - data_load
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    networks:
+      - app-network
 
   data_research:
-    build: {context: ., dockerfile: src/data_research/Dockerfile}
-    volumes: ["./data:/app/data", "./src:/app/src"]
-    depends_on: [data_quality]
+    build:
+      context: .
+      dockerfile: src/data_research/Dockerfile
+    container_name: data_research_service
+    depends_on:
+      - data_quality
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    networks:
+      - app-network
 
   visualization:
-    build: {context: ., dockerfile: src/visualization/Dockerfile}
-    volumes: ["./data:/app/data", "./src:/app/src"]
-    depends_on: [data_research]
+    build:
+      context: .
+      dockerfile: src/visualization/Dockerfile
+    container_name: visualization_service
+    depends_on:
+      - data_research
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
