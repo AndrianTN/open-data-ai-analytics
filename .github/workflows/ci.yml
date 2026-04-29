@@ -61,12 +61,7 @@ jobs:
       fail-fast: false
       matrix:
         module: [data_load, data_quality, data_research, visualization]
-
-    if: |
-      github.event_name != 'workflow_dispatch' ||
-      github.event.inputs.module == 'all' ||
-      github.event.inputs.module == matrix.module
-
+        
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
