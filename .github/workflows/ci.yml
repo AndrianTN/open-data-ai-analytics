@@ -63,16 +63,9 @@ jobs:
         module: [data_load, data_quality, data_research, visualization]
 
     if: |
-      github.event_name == 'workflow_dispatch' &&
-      (github.event.inputs.module == 'all' || github.event.inputs.module == matrix.module)
-      ||
-      github.event_name != 'workflow_dispatch' &&
-      (
-        matrix.module == 'data_load' && needs.detect-changes.outputs.data_load == 'true' ||
-        matrix.module == 'data_quality' && needs.detect-changes.outputs.data_quality == 'true' ||
-        matrix.module == 'data_research' && needs.detect-changes.outputs.data_research == 'true' ||
-        matrix.module == 'visualization' && needs.detect-changes.outputs.visualization == 'true'
-      )
+      github.event_name != 'workflow_dispatch' ||
+      github.event.inputs.module == 'all' ||
+      github.event.inputs.module == matrix.module
 
     steps:
       - name: Checkout repository
