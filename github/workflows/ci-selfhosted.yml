@@ -1,0 +1,41 @@
+name: CI on self-hosted runner
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: [main]
+    paths:
+      - 'src/data_quality/**'
+      - 'data/raw/**'
+
+jobs:
+  run-data-quality-local:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check Python version
+        run: |
+          python --version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Create artifacts directory
+        run: |
+          mkdir -p artifacts/selfhosted-data-quality
+
+      - name: Run data_quality module on self-hosted runner
+        run: |
+          python src/data_quality/quality_check.py > artifacts/selfhosted-data-quality/log.txt 2>&1
+
+      - name: Upload self-hosted artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: selfhosted-data-quality-artifacts
+          path: artifacts/selfhosted-data-quality
