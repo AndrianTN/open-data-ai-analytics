@@ -18,3 +18,22 @@
 
 Великі файли даних не додаються в репозиторій.  
 У Git зберігається лише код, документація та результати аналізу.
+
+## Запуск проєкту через Docker
+
+Проєкт складається з кількох сервісів:
+
+- `data_load` — завантаження або підготовка даних;
+- `data_quality` — перевірка якості даних;
+- `data_research` — аналіз даних;
+- `visualization` — побудова графіків.
+
+### Структура Docker-сервісів
+
+Для кожного модуля створено окремий `Dockerfile`:
+
+```text
+src/data_load/Dockerfile
+src/data_quality/Dockerfile
+src/data_research/Dockerfile
+src/visualization/Dockerfile
