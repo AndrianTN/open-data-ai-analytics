@@ -52,6 +52,20 @@ services:
     networks:
       - app-network
 
+  web:
+    build:
+      context: .
+      dockerfile: src/web/Dockerfile
+    container_name: web_service
+    depends_on:
+      - visualization
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./reports:/app/reports
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
