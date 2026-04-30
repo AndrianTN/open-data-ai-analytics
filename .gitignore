@@ -22,8 +22,12 @@ data/raw/*
 data/*.xlsx
 data/*.json
 
-# Reports generated automatically
-reports/figures/*.png
+# Ignore generated figures except sample ones
+reports/figures/*
+!reports/figures/passengers_by_branch.png
+!reports/figures/passengers_by_year.png
+
+
 reports/figures/*.jpg
 reports/figures/*.html
 
