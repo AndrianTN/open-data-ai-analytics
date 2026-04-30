@@ -14,9 +14,11 @@ env/
 # Environment variables
 .env
 
-# Raw data / large files
-data/raw/
-data/*.csv
+# Ignore large raw datasets, but keep sample CSV for lab demonstration
+data/raw/*
+!data/raw/passengers.csv
+
+
 data/*.xlsx
 data/*.json
 
