@@ -1,0 +1,22 @@
+{
+    "total_rows": 96,
+    "missing_values": {
+        "id": 0,
+        "year": 0,
+        "month": 0,
+        "branch": 0,
+        "passengers": 0
+    },
+    "duplicates": 0,
+    "data_types": {
+        "id": "int64",
+        "year": "int64",
+        "month": "int64",
+        "branch": "object",
+        "passengers": "int64"
+    },
+    "invalid_values": {
+        "negative_passengers": 0,
+        "invalid_month": 0
+    }
+}
