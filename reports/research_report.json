@@ -1,0 +1,18 @@
+{
+    "stats": {
+        "total_passengers": 13867000,
+        "average_passengers": 144447.91666666666,
+        "max_passengers": 270000,
+        "min_passengers": 68000
+    },
+    "by_branch": {
+        "Donetsk Railway": 2086000,
+        "Lviv Railway": 3683000,
+        "Odessa Railway": 2785000,
+        "South-Western Railway": 5313000
+    },
+    "by_year": {
+        "2023": 6581000,
+        "2024": 7286000
+    }
+}
