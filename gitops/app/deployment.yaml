@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: open-data-app
-        image: andriantn/open-data-ai-analytics:latest
+        image: ghcr.io/andriantn/open-data-ai-analytics:latest
         ports:
         - containerPort: 5000
